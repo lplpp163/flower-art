@@ -1,0 +1,48 @@
+@import "tailwindcss";
+
+:root {
+  --color-rose: #D4A5A5;
+  --color-rose-light: #E8C8C8;
+  --color-rose-dark: #B88A8A;
+  --color-sage: #A8C5A0;
+  --color-sage-light: #C5DBC0;
+  --color-sage-dark: #8AAF80;
+  --color-warm-bg: #FDF8F4;
+  --color-warm-card: #FFFFFF;
+  --color-text-primary: #4A4A4A;
+  --color-text-secondary: #7A7A7A;
+  --color-text-light: #9A9A9A;
+  --color-border: #E8E0D8;
+}
+
+@theme inline {
+  --color-rose: var(--color-rose);
+  --color-rose-light: var(--color-rose-light);
+  --color-rose-dark: var(--color-rose-dark);
+  --color-sage: var(--color-sage);
+  --color-sage-light: var(--color-sage-light);
+  --color-sage-dark: var(--color-sage-dark);
+  --color-warm-bg: var(--color-warm-bg);
+  --color-warm-card: var(--color-warm-card);
+  --color-text-primary: var(--color-text-primary);
+  --color-text-secondary: var(--color-text-secondary);
+  --color-text-light: var(--color-text-light);
+  --color-border: var(--color-border);
+  --font-serif: "Noto Serif TC", serif;
+  --font-sans: "Noto Sans TC", sans-serif;
+}
+
+body {
+  background: var(--color-warm-bg);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+}
+
+::selection {
+  background-color: var(--color-rose-light);
+  color: var(--color-text-primary);
+}
