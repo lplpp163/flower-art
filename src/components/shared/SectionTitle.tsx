@@ -1,5 +1,3 @@
-'use client';
-
 interface SectionTitleProps {
   readonly title: string;
   readonly subtitle?: string;

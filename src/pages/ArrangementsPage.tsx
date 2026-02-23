@@ -1,13 +1,7 @@
-import type { Metadata } from 'next';
-import Link from 'next/link';
+import { Link } from 'react-router-dom';
 import { getAllArrangements } from '@/lib/data';
 import SectionTitle from '@/components/shared/SectionTitle';
 import ImageWithFallback from '@/components/shared/ImageWithFallback';
-
-export const metadata: Metadata = {
-  title: '花型教學',
-  description: '圓形花型、三角形結構、線條感設計——三種基礎花型的步驟圖解教學。',
-};
 
 const difficultyColors = {
   '初學': 'bg-sage-light text-sage-dark',
@@ -29,7 +23,7 @@ export default function ArrangementsPage() {
         {arrangements.map((arr) => (
           <Link
             key={arr.slug}
-            href={`/arrangements/${arr.slug}`}
+            to={`/arrangements/${arr.slug}`}
             className="group bg-warm-card rounded-xl border border-border overflow-hidden hover:shadow-md hover:border-rose-light transition-all"
           >
             <div className="relative h-52 overflow-hidden">

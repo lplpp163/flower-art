@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import { Link } from 'react-router-dom';
 import { getDailyEncouragement } from '@/lib/data';
 
 const features = [
@@ -45,7 +45,6 @@ export default function HomePage() {
 
   return (
     <div>
-      {/* Hero Section */}
       <section className="relative bg-gradient-to-b from-rose-light/20 to-warm-bg py-20 md:py-28 px-4">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="font-serif text-3xl md:text-5xl text-text-primary font-bold leading-tight mb-6">
@@ -58,13 +57,13 @@ export default function HomePage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
-              href="/flowers"
+              to="/flowers"
               className="inline-flex items-center justify-center px-6 py-3 bg-rose text-white rounded-full font-medium hover:bg-rose-dark transition-colors"
             >
               開始認識花材
             </Link>
             <Link
-              href="/practice"
+              to="/practice"
               className="inline-flex items-center justify-center px-6 py-3 bg-white text-rose-dark border border-rose rounded-full font-medium hover:bg-rose-light/20 transition-colors"
             >
               今天來練習
@@ -73,7 +72,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Daily Encouragement */}
       <section className="max-w-2xl mx-auto px-4 -mt-6">
         <div className="bg-warm-card rounded-xl shadow-sm border border-border p-6 text-center">
           <p className="text-sm text-text-light mb-1">今日花語小語</p>
@@ -83,7 +81,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Feature Cards */}
       <section className="max-w-6xl mx-auto px-4 py-16">
         <h2 className="font-serif text-2xl md:text-3xl text-text-primary font-bold text-center mb-10">
           探索花藝世界
@@ -92,7 +89,7 @@ export default function HomePage() {
           {features.map((feature) => (
             <Link
               key={feature.href}
-              href={feature.href}
+              to={feature.href}
               className="group bg-warm-card rounded-xl border border-border p-6 hover:shadow-md hover:border-rose-light transition-all"
             >
               <span className="text-3xl block mb-3">{feature.icon}</span>
@@ -107,7 +104,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Beginner Guide */}
       <section className="bg-sage-light/20 py-16 px-4">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="font-serif text-2xl md:text-3xl text-text-primary font-bold mb-6">
@@ -118,21 +114,21 @@ export default function HomePage() {
               <div className="text-rose-dark font-bold text-lg mb-2">Step 1</div>
               <h3 className="font-semibold mb-2">認識花材</h3>
               <p className="text-text-secondary text-sm">
-                先到<Link href="/flowers" className="text-rose-dark underline">花語圖鑑</Link>認識常見花材，了解它們的特性和花語。
+                先到<Link to="/flowers" className="text-rose-dark underline">花語圖鑑</Link>認識常見花材，了解它們的特性和花語。
               </p>
             </div>
             <div className="bg-warm-card rounded-xl p-6 border border-border">
               <div className="text-rose-dark font-bold text-lg mb-2">Step 2</div>
               <h3 className="font-semibold mb-2">學習基礎</h3>
               <p className="text-text-secondary text-sm">
-                到<Link href="/structure" className="text-rose-dark underline">結構解析</Link>理解重心和比例，再看<Link href="/arrangements" className="text-rose-dark underline">花型教學</Link>學習插花步驟。
+                到<Link to="/structure" className="text-rose-dark underline">結構解析</Link>理解重心和比例，再看<Link to="/arrangements" className="text-rose-dark underline">花型教學</Link>學習插花步驟。
               </p>
             </div>
             <div className="bg-warm-card rounded-xl p-6 border border-border">
               <div className="text-rose-dark font-bold text-lg mb-2">Step 3</div>
               <h3 className="font-semibold mb-2">動手練習</h3>
               <p className="text-text-secondary text-sm">
-                前往<Link href="/practice" className="text-rose-dark underline">今天練什麼</Link>獲取練習建議，記錄你的每一次進步！
+                前往<Link to="/practice" className="text-rose-dark underline">今天練什麼</Link>獲取練習建議，記錄你的每一次進步！
               </p>
             </div>
           </div>

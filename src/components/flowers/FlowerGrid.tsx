@@ -1,5 +1,3 @@
-'use client';
-
 import { useState, useMemo } from 'react';
 import type { Flower } from '@/types';
 import FlowerCard from './FlowerCard';
@@ -28,7 +26,6 @@ export default function FlowerGrid({ flowers }: FlowerGridProps) {
 
   return (
     <div>
-      {/* Search & Filter */}
       <div className="flex flex-col sm:flex-row gap-4 mb-8">
         <input
           type="text"
@@ -55,7 +52,6 @@ export default function FlowerGrid({ flowers }: FlowerGridProps) {
         </div>
       </div>
 
-      {/* Grid */}
       {filtered.length === 0 ? (
         <p className="text-center text-text-light py-12">找不到符合的花材，試試其他關鍵字？</p>
       ) : (

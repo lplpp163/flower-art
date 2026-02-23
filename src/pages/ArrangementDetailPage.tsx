@@ -1,38 +1,22 @@
-import type { Metadata } from 'next';
-import Link from 'next/link';
-import { notFound } from 'next/navigation';
-import { getAllArrangements, getArrangementBySlug } from '@/lib/data';
+import { Link, useParams, Navigate } from 'react-router-dom';
+import { getArrangementBySlug } from '@/lib/data';
 import CalloutBox from '@/components/shared/CalloutBox';
 import ImageWithFallback from '@/components/shared/ImageWithFallback';
 
-interface PageProps {
-  params: Promise<{ slug: string }>;
-}
+export default function ArrangementDetailPage() {
+  const { slug } = useParams<{ slug: string }>();
+  const arr = slug ? getArrangementBySlug(slug) : undefined;
 
-export async function generateStaticParams() {
-  return getAllArrangements().map((a) => ({ slug: a.slug }));
-}
-
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { slug } = await params;
-  const arr = getArrangementBySlug(slug);
-  if (!arr) return { title: '找不到花型' };
-  return { title: arr.name, description: arr.description };
-}
-
-export default async function ArrangementDetailPage({ params }: PageProps) {
-  const { slug } = await params;
-  const arr = getArrangementBySlug(slug);
-  if (!arr) notFound();
+  if (!arr) return <Navigate to="/" replace />;
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-12">
-      <Link href="/arrangements" className="text-text-light hover:text-rose-dark text-sm mb-6 inline-block transition-colors">
+      <Link to="/arrangements" className="text-text-light hover:text-rose-dark text-sm mb-6 inline-block transition-colors">
         ← 返回花型教學
       </Link>
 
       <div className="relative h-64 md:h-80 rounded-xl overflow-hidden mb-8">
-        <ImageWithFallback src={arr.imageUrl} alt={arr.name} fill className="object-cover" priority />
+        <ImageWithFallback src={arr.imageUrl} alt={arr.name} fill className="object-cover" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
         <div className="absolute bottom-6 left-6">
           <h1 className="font-serif text-3xl text-white font-bold mb-1">{arr.name}</h1>
@@ -42,7 +26,6 @@ export default async function ArrangementDetailPage({ params }: PageProps) {
 
       <p className="text-text-secondary leading-relaxed mb-8">{arr.description}</p>
 
-      {/* Characteristics */}
       <div className="bg-sage-light/20 rounded-xl p-6 mb-8">
         <h2 className="font-serif text-lg font-bold text-text-primary mb-3">特色</h2>
         <ul className="space-y-2">
@@ -55,7 +38,6 @@ export default async function ArrangementDetailPage({ params }: PageProps) {
         </ul>
       </div>
 
-      {/* Materials */}
       <div className="bg-rose-light/20 rounded-xl p-6 mb-8">
         <h2 className="font-serif text-lg font-bold text-text-primary mb-3">準備材料</h2>
         <div className="flex flex-wrap gap-2">
@@ -67,7 +49,6 @@ export default async function ArrangementDetailPage({ params }: PageProps) {
         </div>
       </div>
 
-      {/* Steps */}
       <h2 className="font-serif text-xl font-bold text-text-primary mb-6">步驟教學</h2>
       <div className="space-y-6 mb-8">
         {arr.steps.map((step) => (
@@ -90,7 +71,6 @@ export default async function ArrangementDetailPage({ params }: PageProps) {
         ))}
       </div>
 
-      {/* Tips */}
       <div className="bg-warm-card rounded-xl border border-border p-6">
         <h2 className="font-serif text-lg font-bold text-text-primary mb-3">練習小提醒</h2>
         <ul className="space-y-2">

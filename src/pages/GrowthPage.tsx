@@ -1,5 +1,3 @@
-'use client';
-
 import { usePracticeLog } from '@/hooks/usePracticeLog';
 import SectionTitle from '@/components/shared/SectionTitle';
 
@@ -16,7 +14,7 @@ export default function GrowthPage() {
   const { logs } = usePracticeLog();
 
   const groupedByDate = logs.reduce<Record<string, typeof logs>>((acc, log) => {
-    const month = log.date.substring(0, 7); // YYYY-MM
+    const month = log.date.substring(0, 7);
     return { ...acc, [month]: [...(acc[month] ?? []), log] };
   }, {});
 
@@ -29,7 +27,6 @@ export default function GrowthPage() {
         subtitle="回顧你的花藝學習歷程"
       />
 
-      {/* Stats */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
         <div className="bg-warm-card rounded-xl border border-border p-4 text-center">
           <span className="text-2xl font-bold text-rose-dark">{logs.length}</span>
@@ -53,7 +50,6 @@ export default function GrowthPage() {
         </div>
       </div>
 
-      {/* Milestones */}
       <div className="mb-12">
         <h2 className="font-serif text-xl font-bold text-text-primary mb-4">成就里程碑</h2>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
@@ -78,7 +74,6 @@ export default function GrowthPage() {
         </div>
       </div>
 
-      {/* Timeline */}
       {logs.length === 0 ? (
         <div className="text-center py-12">
           <span className="text-5xl block mb-4">🌱</span>

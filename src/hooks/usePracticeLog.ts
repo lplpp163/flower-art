@@ -1,12 +1,9 @@
-'use client';
-
 import { useState, useEffect, useCallback } from 'react';
 import type { PracticeLog } from '@/types';
 
 const STORAGE_KEY = 'flower-practice-logs';
 
 function readLogs(): PracticeLog[] {
-  if (typeof window === 'undefined') return [];
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     return raw ? (JSON.parse(raw) as PracticeLog[]) : [];

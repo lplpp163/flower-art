@@ -1,12 +1,6 @@
-import type { Metadata } from 'next';
-import { getAllBlogPosts, getAllTags } from '@/lib/mdx';
+import { getAllBlogPosts, getAllTags } from '@/data/journal';
 import SectionTitle from '@/components/shared/SectionTitle';
 import JournalList from '@/components/journal/JournalList';
-
-export const metadata: Metadata = {
-  title: '學習日誌',
-  description: '花藝知識與心得分享，陪伴你的學習旅程。',
-};
 
 export default function JournalPage() {
   const posts = getAllBlogPosts();

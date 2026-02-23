@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import { Link } from 'react-router-dom';
 
 export default function Footer() {
   return (
@@ -16,18 +16,18 @@ export default function Footer() {
           <div>
             <h4 className="font-semibold text-text-primary mb-3 text-sm">快速導覽</h4>
             <div className="flex flex-col gap-2">
-              <Link href="/flowers" className="text-text-light hover:text-rose-dark text-sm transition-colors">花語圖鑑</Link>
-              <Link href="/arrangements" className="text-text-light hover:text-rose-dark text-sm transition-colors">花型教學</Link>
-              <Link href="/structure" className="text-text-light hover:text-rose-dark text-sm transition-colors">結構解析</Link>
-              <Link href="/journal" className="text-text-light hover:text-rose-dark text-sm transition-colors">學習日誌</Link>
+              <Link to="/flowers" className="text-text-light hover:text-rose-dark text-sm transition-colors">花語圖鑑</Link>
+              <Link to="/arrangements" className="text-text-light hover:text-rose-dark text-sm transition-colors">花型教學</Link>
+              <Link to="/structure" className="text-text-light hover:text-rose-dark text-sm transition-colors">結構解析</Link>
+              <Link to="/journal" className="text-text-light hover:text-rose-dark text-sm transition-colors">學習日誌</Link>
             </div>
           </div>
 
           <div>
             <h4 className="font-semibold text-text-primary mb-3 text-sm">學習資源</h4>
             <div className="flex flex-col gap-2">
-              <Link href="/practice" className="text-text-light hover:text-rose-dark text-sm transition-colors">今天練什麼</Link>
-              <Link href="/growth" className="text-text-light hover:text-rose-dark text-sm transition-colors">成長故事</Link>
+              <Link to="/practice" className="text-text-light hover:text-rose-dark text-sm transition-colors">今天練什麼</Link>
+              <Link to="/growth" className="text-text-light hover:text-rose-dark text-sm transition-colors">成長故事</Link>
             </div>
           </div>
         </div>

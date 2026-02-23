@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import { Link } from 'react-router-dom';
 import type { Flower } from '@/types';
 import ImageWithFallback from '@/components/shared/ImageWithFallback';
 
@@ -15,7 +15,7 @@ const careLevelColors = {
 export default function FlowerCard({ flower }: FlowerCardProps) {
   return (
     <Link
-      href={`/flowers/${flower.slug}`}
+      to={`/flowers/${flower.slug}`}
       className="group bg-warm-card rounded-xl border border-border overflow-hidden hover:shadow-md hover:border-rose-light transition-all"
     >
       <div className="relative h-48 overflow-hidden">

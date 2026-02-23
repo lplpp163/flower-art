@@ -1,26 +1,17 @@
-'use client';
-
-import Image from 'next/image';
 import { useState } from 'react';
 
 interface ImageWithFallbackProps {
   readonly src: string;
   readonly alt: string;
-  readonly width?: number;
-  readonly height?: number;
   readonly fill?: boolean;
   readonly className?: string;
-  readonly priority?: boolean;
 }
 
 export default function ImageWithFallback({
   src,
   alt,
-  width,
-  height,
   fill,
   className = '',
-  priority = false,
 }: ImageWithFallbackProps) {
   const [hasError, setHasError] = useState(false);
 
@@ -28,7 +19,7 @@ export default function ImageWithFallback({
     return (
       <div
         className={`bg-rose-light/30 flex items-center justify-center ${className}`}
-        style={fill ? { position: 'absolute', inset: 0 } : { width, height }}
+        style={fill ? { position: 'absolute', inset: 0 } : undefined}
       >
         <span className="text-4xl">🌸</span>
       </div>
@@ -36,16 +27,13 @@ export default function ImageWithFallback({
   }
 
   return (
-    <Image
+    <img
       src={src}
       alt={alt}
-      width={fill ? undefined : width}
-      height={fill ? undefined : height}
-      fill={fill}
       className={className}
-      priority={priority}
+      style={fill ? { position: 'absolute', inset: 0, width: '100%', height: '100%' } : undefined}
       onError={() => setHasError(true)}
-      unoptimized
+      loading="lazy"
     />
   );
 }

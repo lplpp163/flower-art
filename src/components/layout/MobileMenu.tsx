@@ -1,6 +1,4 @@
-'use client';
-
-import Link from 'next/link';
+import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
 
 interface MobileMenuProps {
@@ -50,7 +48,7 @@ export default function MobileMenu({ isOpen, onClose, links }: MobileMenuProps) 
           {links.map((link) => (
             <Link
               key={link.href}
-              href={link.href}
+              to={link.href}
               className="text-text-secondary hover:text-rose-dark transition-colors text-base font-medium py-2"
               onClick={onClose}
             >

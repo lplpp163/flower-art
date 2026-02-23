@@ -1,42 +1,23 @@
-import type { Metadata } from 'next';
-import Link from 'next/link';
-import { notFound } from 'next/navigation';
-import { getAllFlowers, getFlowerBySlug } from '@/lib/data';
+import { Link, useParams, Navigate } from 'react-router-dom';
+import { getFlowerBySlug } from '@/lib/data';
 import ImageWithFallback from '@/components/shared/ImageWithFallback';
 import CalloutBox from '@/components/shared/CalloutBox';
 
-interface PageProps {
-  params: Promise<{ slug: string }>;
-}
+export default function FlowerDetailPage() {
+  const { slug } = useParams<{ slug: string }>();
+  const flower = slug ? getFlowerBySlug(slug) : undefined;
 
-export async function generateStaticParams() {
-  return getAllFlowers().map((f) => ({ slug: f.slug }));
-}
-
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { slug } = await params;
-  const flower = getFlowerBySlug(slug);
-  if (!flower) return { title: '找不到花卉' };
-  return {
-    title: flower.name,
-    description: `${flower.name}（${flower.englishName}）— ${flower.meaning}`,
-  };
-}
-
-export default async function FlowerDetailPage({ params }: PageProps) {
-  const { slug } = await params;
-  const flower = getFlowerBySlug(slug);
-  if (!flower) notFound();
+  if (!flower) return <Navigate to="/" replace />;
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-12">
-      <Link href="/flowers" className="text-text-light hover:text-rose-dark text-sm mb-6 inline-block transition-colors">
+      <Link to="/flowers" className="text-text-light hover:text-rose-dark text-sm mb-6 inline-block transition-colors">
         ← 返回花語圖鑑
       </Link>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
         <div className="relative h-72 md:h-96 rounded-xl overflow-hidden">
-          <ImageWithFallback src={flower.imageUrl} alt={flower.name} fill className="object-cover" priority />
+          <ImageWithFallback src={flower.imageUrl} alt={flower.name} fill className="object-cover" />
         </div>
 
         <div>
@@ -75,7 +56,7 @@ export default async function FlowerDetailPage({ params }: PageProps) {
         </div>
       </div>
 
-      <div className="prose max-w-none">
+      <div>
         <h2 className="font-serif text-xl font-bold text-text-primary mb-3">關於{flower.name}</h2>
         <p className="text-text-secondary leading-relaxed mb-6">{flower.description}</p>
 

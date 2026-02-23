@@ -1,5 +1,3 @@
-'use client';
-
 import { useState, useCallback } from 'react';
 import { getAllPracticeSuggestions, getRandomEncouragement } from '@/lib/data';
 import type { PracticeSuggestion, PracticeLog } from '@/types';
@@ -52,7 +50,6 @@ export default function PracticePage() {
         subtitle="讓花藝練習成為每天的小確幸"
       />
 
-      {/* Random Picker */}
       <div className="text-center mb-12">
         <button
           type="button"
@@ -63,7 +60,6 @@ export default function PracticePage() {
         </button>
       </div>
 
-      {/* Current Suggestion */}
       {current && (
         <div className="bg-warm-card rounded-xl border border-rose-light p-6 mb-8">
           <p className="text-rose text-sm italic mb-4">「{encouragement}」</p>
@@ -91,7 +87,6 @@ export default function PracticePage() {
             </div>
           </div>
 
-          {/* Record Section */}
           <div className="border-t border-border pt-4 mt-4">
             <p className="text-sm font-medium text-text-primary mb-3">練習完了嗎？記錄一下心情吧！</p>
             <div className="flex gap-3 mb-3">
@@ -126,7 +121,6 @@ export default function PracticePage() {
         </div>
       )}
 
-      {/* Practice History */}
       {logs.length > 0 && (
         <div>
           <h2 className="font-serif text-xl font-bold text-text-primary mb-4">練習紀錄</h2>

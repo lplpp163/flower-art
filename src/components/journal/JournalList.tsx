@@ -1,7 +1,5 @@
-'use client';
-
 import { useState, useMemo } from 'react';
-import Link from 'next/link';
+import { Link } from 'react-router-dom';
 import type { BlogPost } from '@/types';
 import ImageWithFallback from '@/components/shared/ImageWithFallback';
 
@@ -20,7 +18,6 @@ export default function JournalList({ posts, tags }: JournalListProps) {
 
   return (
     <div>
-      {/* Tag Filter */}
       <div className="flex flex-wrap gap-2 mb-8">
         <button
           type="button"
@@ -49,12 +46,11 @@ export default function JournalList({ posts, tags }: JournalListProps) {
         ))}
       </div>
 
-      {/* Posts */}
       <div className="space-y-6">
         {filtered.map((post) => (
           <Link
             key={post.slug}
-            href={`/journal/${post.slug}`}
+            to={`/journal/${post.slug}`}
             className="group flex flex-col sm:flex-row gap-4 bg-warm-card rounded-xl border border-border overflow-hidden hover:shadow-md hover:border-rose-light transition-all"
           >
             <div className="relative w-full sm:w-48 h-40 sm:h-auto shrink-0">

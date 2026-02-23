@@ -1,12 +1,6 @@
-import type { Metadata } from 'next';
-import Link from 'next/link';
+import { Link } from 'react-router-dom';
 import { getAllStructureTopics } from '@/lib/data';
 import SectionTitle from '@/components/shared/SectionTitle';
-
-export const metadata: Metadata = {
-  title: '結構解析',
-  description: '重心、比例、平衡——掌握花藝的核心結構原理。',
-};
 
 const topicIcons: Record<string, string> = {
   gravity: '⚖️',
@@ -28,7 +22,7 @@ export default function StructurePage() {
         {topics.map((topic) => (
           <Link
             key={topic.slug}
-            href={`/structure/${topic.slug}`}
+            to={`/structure/${topic.slug}`}
             className="group bg-warm-card rounded-xl border border-border p-6 hover:shadow-md hover:border-rose-light transition-all"
           >
             <span className="text-4xl block mb-4">{topicIcons[topic.slug] ?? '📖'}</span>

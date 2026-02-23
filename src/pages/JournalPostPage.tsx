@@ -1,41 +1,26 @@
-import type { Metadata } from 'next';
-import Link from 'next/link';
-import { notFound } from 'next/navigation';
-import { getAllBlogPosts, getBlogPostBySlug } from '@/lib/mdx';
-import { MDXRemote } from 'next-mdx-remote/rsc';
+import { Link, useParams, Navigate } from 'react-router-dom';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+import { getBlogPostBySlug } from '@/data/journal';
 import ImageWithFallback from '@/components/shared/ImageWithFallback';
 
-interface PageProps {
-  params: Promise<{ slug: string }>;
-}
+export default function JournalPostPage() {
+  const { slug } = useParams<{ slug: string }>();
+  const post = slug ? getBlogPostBySlug(slug) : undefined;
 
-export async function generateStaticParams() {
-  return getAllBlogPosts().map((p) => ({ slug: p.slug }));
-}
-
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { slug } = await params;
-  const post = getBlogPostBySlug(slug);
-  if (!post) return { title: '找不到文章' };
-  return { title: post.meta.title, description: post.meta.excerpt };
-}
-
-export default async function JournalPostPage({ params }: PageProps) {
-  const { slug } = await params;
-  const post = getBlogPostBySlug(slug);
-  if (!post) notFound();
+  if (!post) return <Navigate to="/journal" replace />;
 
   const { meta, content } = post;
 
   return (
     <div className="max-w-3xl mx-auto px-4 py-12">
-      <Link href="/journal" className="text-text-light hover:text-rose-dark text-sm mb-6 inline-block transition-colors">
+      <Link to="/journal" className="text-text-light hover:text-rose-dark text-sm mb-6 inline-block transition-colors">
         ← 返回學習日誌
       </Link>
 
       {meta.coverImage && (
         <div className="relative h-52 md:h-72 rounded-xl overflow-hidden mb-8">
-          <ImageWithFallback src={meta.coverImage} alt={meta.title} fill className="object-cover" priority />
+          <ImageWithFallback src={meta.coverImage} alt={meta.title} fill className="object-cover" />
         </div>
       )}
 
@@ -60,11 +45,11 @@ export default async function JournalPostPage({ params }: PageProps) {
         [&_p]:text-text-secondary [&_p]:leading-relaxed [&_p]:text-sm
         [&_li]:text-text-secondary [&_li]:text-sm
         [&_strong]:text-text-primary
-        [&_blockquote]:border-rose [&_blockquote]:bg-rose-light/10 [&_blockquote]:rounded-r-lg [&_blockquote]:py-3 [&_blockquote]:px-4
+        [&_blockquote]:border-rose [&_blockquote]:bg-rose-light/10 [&_blockquote]:rounded-r-lg [&_blockquote]:py-3 [&_blockquote]:px-4 [&_blockquote]:border-l-4
         [&_blockquote_p]:text-rose-dark [&_blockquote_p]:italic
         [&_a]:text-rose-dark [&_a]:underline
       ">
-        <MDXRemote source={content} />
+        <ReactMarkdown remarkPlugins={[remarkGfm]}>{content}</ReactMarkdown>
       </article>
     </div>
   );

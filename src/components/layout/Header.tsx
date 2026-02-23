@@ -1,6 +1,4 @@
-'use client';
-
-import Link from 'next/link';
+import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import MobileMenu from './MobileMenu';
 
@@ -19,7 +17,7 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 bg-warm-bg/90 backdrop-blur-sm border-b border-border">
       <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-        <Link href="/" className="font-serif text-xl text-rose-dark font-bold tracking-wider">
+        <Link to="/" className="font-serif text-xl text-rose-dark font-bold tracking-wider">
           花藝學習
         </Link>
 
@@ -27,7 +25,7 @@ export default function Header() {
           {navLinks.map((link) => (
             <Link
               key={link.href}
-              href={link.href}
+              to={link.href}
               className="text-text-secondary hover:text-rose-dark transition-colors text-sm font-medium"
             >
               {link.label}
