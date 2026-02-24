@@ -4,6 +4,7 @@ export interface Flower {
   readonly englishName: string;
   readonly meaning: string;
   readonly description: string;
+  readonly quickFacts?: readonly string[];
   readonly season: readonly string[];
   readonly colors: readonly string[];
   readonly careLevel: '簡單' | '中等' | '進階';
@@ -16,6 +17,7 @@ export interface ArrangementStep {
   readonly stepNumber: number;
   readonly title: string;
   readonly description: string;
+  readonly keyAction?: string;
   readonly tip?: string;
 }
 
@@ -45,6 +47,8 @@ export interface StructureTopic {
 export interface StructureSection {
   readonly title: string;
   readonly content: string;
+  readonly summary?: string;
+  readonly bulletPoints?: readonly string[];
   readonly tip?: string;
 }
 

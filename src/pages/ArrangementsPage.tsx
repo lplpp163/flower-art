@@ -2,11 +2,12 @@ import { Link } from 'react-router-dom';
 import { getAllArrangements } from '@/lib/data';
 import SectionTitle from '@/components/shared/SectionTitle';
 import ImageWithFallback from '@/components/shared/ImageWithFallback';
+import DifficultyMeter from '@/components/shared/DifficultyMeter';
 
-const difficultyColors = {
-  '初學': 'bg-sage-light text-sage-dark',
-  '基礎': 'bg-rose-light text-rose-dark',
-  '進階': 'bg-yellow-100 text-yellow-700',
+const difficultyToLevel = {
+  '初學': '簡單',
+  '基礎': '中等',
+  '進階': '進階',
 } as const;
 
 export default function ArrangementsPage() {
@@ -32,23 +33,25 @@ export default function ArrangementsPage() {
                 alt={arr.name}
                 fill
                 className="object-cover group-hover:scale-105 transition-transform duration-300"
+                fallbackType="arrangement"
               />
-              <div className="absolute top-3 right-3">
-                <span className={`text-xs px-2.5 py-1 rounded-full font-medium ${difficultyColors[arr.difficulty]}`}>
-                  {arr.difficulty}
-                </span>
-              </div>
             </div>
             <div className="p-5">
-              <h3 className="font-serif text-xl font-bold text-text-primary group-hover:text-rose-dark transition-colors mb-1">
-                {arr.name}
-              </h3>
-              <p className="text-text-light text-sm mb-3">{arr.subtitle}</p>
-              <p className="text-text-secondary text-sm leading-relaxed line-clamp-3">
+              <div className="flex items-center justify-between mb-2">
+                <h3 className="font-serif text-xl font-bold text-text-primary group-hover:text-rose-dark transition-colors">
+                  {arr.name}
+                </h3>
+                <DifficultyMeter level={difficultyToLevel[arr.difficulty]} />
+              </div>
+              <p className="text-text-light text-sm mb-2">{arr.subtitle}</p>
+              <p className="text-text-secondary text-sm leading-relaxed line-clamp-2 mb-3">
                 {arr.description}
               </p>
-              <div className="mt-4 flex items-center gap-1 text-rose-dark text-sm font-medium">
-                查看步驟教學 →
+              <div className="flex items-center justify-between">
+                <span className="text-xs text-text-light">{arr.steps.length} 個步驟</span>
+                <span className="text-rose-dark text-sm font-medium">
+                  查看教學 →
+                </span>
               </div>
             </div>
           </Link>
