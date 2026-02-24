@@ -35,5 +35,23 @@ export function usePracticeLog() {
     });
   }, []);
 
-  return { logs, addLog } as const;
+  const deleteLog = useCallback((id: string) => {
+    setLogs((prev) => {
+      const next = prev.filter((log) => log.id !== id);
+      writeLogs(next);
+      return next;
+    });
+  }, []);
+
+  const updateLog = useCallback((id: string, patch: Partial<Omit<PracticeLog, 'id'>>) => {
+    setLogs((prev) => {
+      const next = prev.map((log) =>
+        log.id === id ? { ...log, ...patch } : log,
+      );
+      writeLogs(next);
+      return next;
+    });
+  }, []);
+
+  return { logs, addLog, deleteLog, updateLog } as const;
 }

@@ -62,13 +62,43 @@ export interface PracticeSuggestion {
   readonly category: '花型練習' | '結構練習' | '配色練習' | '創意練習';
 }
 
+export type MoodEmoji = '😊' | '😌' | '🤔' | '💪' | '🌸';
+
+export type Feeling =
+  | '溫柔浪漫'
+  | '清新自然'
+  | '活力繽紛'
+  | '簡約現代'
+  | '自然隨性';
+
+export interface FeelingOption {
+  readonly id: Feeling;
+  readonly label: string;
+  readonly description: string;
+  readonly emoji: string;
+  readonly colorClass: string;
+}
+
+export interface GeneratedSuggestion {
+  readonly id: string;
+  readonly title: string;
+  readonly arrangementSlug: string;
+  readonly feeling: Feeling;
+  readonly description: string;
+  readonly difficulty: '初學' | '基礎' | '進階';
+  readonly tips: readonly string[];
+  readonly selectedFlowers: readonly Flower[];
+}
+
 export interface PracticeLog {
   readonly id: string;
   readonly date: string;
   readonly suggestionId: string;
   readonly title: string;
-  readonly mood: '😊' | '😌' | '🤔' | '💪' | '🌸';
+  readonly mood: MoodEmoji;
   readonly notes: string;
+  readonly selectedFlowerSlugs?: readonly string[];
+  readonly feeling?: Feeling;
 }
 
 export interface BlogPost {
